@@ -188,7 +188,7 @@ Pēc tam, nākamajā šūnā, izmantosim mainīgo ```mansMainīgais```, lai rē�
 """
 
 # ╔═╡ 282e816a-81a6-42a4-997d-a9a576fbfe4d
-@bind Tslider3 Slider(200u"K":50u"K":10000u"K",default= 6000u"K",showvalue=true)
+@bind Tslider3 Slider(200u"K":50u"K":10000u"K",default= 6000u"K")
 
 # ╔═╡ 473bdf0d-2921-4693-9cdf-4f7a01e955e2
 begin
