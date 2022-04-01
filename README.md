@@ -9,7 +9,7 @@ Lai strādātu ar Pluto klādi, ir jābūt instalētai uz datora "Julia", bet pa
 ## "Julia" Instalēšana un palaišana
 1. Lejupladēsim "Current stable release" no https://julialang.org/downloads/ attiecīgajai sistēmai. Izmantosim "Installer", ja mums ir tiesības installēt programmatūra datorā, palaidām "Installer" un sekosim instrukcijas. Ja nav tādas tiesības, varam lejupielādēt "portable" versiju. To liksim kādā mapē, klikšķinām ar labo peles pogu un izvelēsim "Extract all". 
 2. Ejam uz julia-x.x.x/bin mapi un spiedīsim "julia" aplikāciju. Atvērsies teksta logs un mēs varam strādāt tiklīdz paradīsies "julia >". 
-![This is an image](/assets/images/Julia-startup.png)
+![This is an image](assets/images/Julia-startup.png)
 
 ## Pluto.jl Instalēšana un palaišana
 1. Startēsim "Julia" programmu.
