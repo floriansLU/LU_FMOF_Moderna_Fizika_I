@@ -135,8 +135,10 @@ md"""
 Ir labi zināt intensitāti pie konkrētās frekvences, bet parasti ir jāzina kopīgā jauda, kura tiek izstarota pa kādu diapazonu. Lai to zinātu, ir jāintegrē spektrs. Mēs izmantosim paketi QuadGK.jl un funkciju ```quadgk()```. Tā funkcija ļauj integrēt funkcija $f(x)$ vienā dimensijā šādi:
 
 ```julia
-integrāls, kļūda = quadgk(x->f(x), no, līdz, pielaujama kļūda)`
+integrāls, kļūda = quadgk(x->f(x), no, līdz, pielaujama kļūda)
 ```
+
+Tātad ```quadgk(x->f(x), no, līdz, pielaujama kļūda)``` $=\int_{no}^{līdz} f(x) \mathrm{dx}$.
 
 Šeit rezultātu dod, kā _Tuple_ ar diviem elementiem. 
 """
@@ -159,6 +161,8 @@ objekts are daudziem elementiem.
 
 Zīmēsim ar citu funkciju, ```plot```. Pirmie elementi, ko dodām ```plot``` ir objekts ar x-vertībam `λ_range` un objekts ar 
 y-vertībām `Bvals`. Pēc tam var dod parametrus. Pēc tam, saucot funkcija ```plot!()``` ar "!" updeito esošo grafiku.
+
+Tik zīmētas vertikālās līnijas pie 400 nm un 700 nm, lai atzīmētu, attiecīgi, redzamās gaismas diapazona violeto un sarkāno robežu. 
 """
 
 # ╔═╡ f7cb975f-1499-49d3-b000-5fe3be3b2ad2
@@ -174,6 +178,8 @@ begin
 	myText=string("Integrālā emisija = ", string(Radiance))    # Veidot tekstu ar rezultātu
 	annotate!(λ_range[1],Bvals[1],(myText,:red,:left))         # Pievienot tekstu ("!" nozīmē "updeito esošo objektu")
 	title!("Melna ķermeņa emisijas spektrs")                   # Pievienot virsrakstu ("!" nozīmē "updeito esošo objektu")
+	plot!([700e-9],seriestype="vline",color="red") # redzāmās gaismas diapazona sarkānā robeža
+	plot!([400e-9],seriestype="vline",color="violet") # redzāmās gaismas diapazona violeta robeža
 end
 
 # ╔═╡ 688cfd30-022f-4cb3-bfa1-85ff36dc3cbc
@@ -201,6 +207,8 @@ begin
 	
 #   	annotate!(λ_range2[100],Bvals2[100],(myText,:red,:left))
    	title!("Melna ķermeņa emisijas spektrs")
+	plot!([700e-9],seriestype="vline",color="red") # redzāmās gaismas diapazona sarkānā robeža
+	plot!([400e-9],seriestype="vline",color="violet") # redzāmās gaismas diapazona violeta robeža
 end
 
 # ╔═╡ f439534b-7730-4098-aa02-82f4cfd242e5
@@ -242,20 +250,60 @@ end
 # ╔═╡ 67f54312-4965-449c-977b-892dc3c04811
 md"""
 ## Tagad Jūsu kārta ##
+Uzdevumu mērķis ir palīdzēt saprast fizikālus jēdzienus. Tika izveidota šī klāde, lai pēc iespējas atveiglotu aprēķinus ar sekunāru mērķi iepazīties ar skaitliskām metodēm, kurs varētu noderēt fizikā. Tomēr, nav jāizmanto obligāti, lai atibldētu uz uzdevumiem. 
 
+Uzdevumus varat iesniegt veidā, kas Jums vissērtāk. Rekomendēju vai nu rakstīt atbildes MS Word dokumentā, papildinot ar skrīnšotiem, kad tas palīdz, vai arī papildināt šo klādi un eksportēt to PDF formātā. Atbildes lūdzu iesniegt Moodle vidē, lai būtu vieglāk labot un sniegt atzīmes. 
+"""
+
+
+# ╔═╡ 2927037b-5d51-4167-a11f-185404a4ab8b
+md"""
 #### Uzdevums 1 ####
+Šajā uzdevumā jūs izmantosiet melnā ķermeņa spektra simulāciju, lai izpētītu, kā objektu emitētā elektromagnētiskā starojuma spektru ietekmē objektu temperatūra. Šajā simulācijā jūs varat ievadīt temperatūru un novērot izstarotā starojuma spektru. Jūs varat arī izmantot [interaktīvu rīku PHET mājas lapā](https://phet.colorado.edu/en/simulations/blackbody-spectrum) ja jums nepatīk šī klāde.
+
+a) Visuma zvaigžņu temperatūra mainās atkarībā no zvaigznes veida un vecuma. Aplūkojot zvaigznes izstarotās gaismas spektra formu, mēs varam kaut ko pateikt par tās vidējo virsmas temperatūru.
+i) Ja mēs novērojam zvaigznes spektru un konstatējam, ka maksimālā jauda ir uz sarkanās un infrasarkanās gaismas robežas, kāda ir aptuvenā zvaigznes virsmas temperatūra? (C grādos) 
+
+ii) Ja mēs novērojam zvaigznes spektru un konstatējam, ka maksimālā jauda ir uz robežas starp zilo un ultravioleto gaismu, kāda ir zvaigznes virsmas temperatūra? (C grādos) 
+
+b) Spuldzes darbojas 2500 °C temperatūrā.
+i) Kāds ir viļņa garums, pie kura tiek izstarota vislielākā jauda, ja spuldze darbojas 2500 C temperatūrā?
+
+ii) Paskaidrojiet, kāpēc parastās kvēlspuldzes patērē daudz enerģijas. Noteikti miniet savu pamatojumu. 
+
+c) Izpētiet, kā novērotais spektrs reaģē uz temperatūras izmaiņām. Ņemiet vērā, ka šeit varat mainīt tikai temperatūru, bet apsveriet, kā mainītos spektrs (jauda pret krāsu), ja mainītu citas objekta īpašības. Domājot par apgalvojumiem (i)--(iii), pasakiet vai apgalvojums ir patiess vai maldīgs:
+  (i) Ja vienīgā izmaiņa, ko veicat, ir objekta temperatūras samazināšana, tad dažos gadījumos pie 1000 nm izstarotās jaudas daudzums palielināsies. 
+
+  (ii) Ja vienīgā izmaiņa, ko veicat, ir objekta temperatūras samazināšana, kopējais izstarotās jaudas daudzums samazinās visos gadījumos. 
+
+  (iii) Ja palielinātu spuldzes kvēlspuldzes virsmas laukumu, bet tās temperatūra paliktu nemainīga, tad lielāka daļa no kopējās emitētās jaudas tiktu emitēta kā infrasarkanais starojums . 
+
+
+Translated with www.DeepL.com/Translator (free version)
+"""
+
+# ╔═╡ b12508b9-083f-4347-93ff-59bfe98995e7
+md"""
+#### Uzdevums 2 ####
+Tagad izmantosiet mūsu arpēķina klādi vai [interaktīvu rīku PHET mājas lapā](https://phet.colorado.edu/en/simulations/blackbody-spectrum), lai izpetītu Viņa pārbīdes likumu.
 1. Pie dažādām temperatūrām, nosakiet viļņa garumu, pie kura emisijas spektram ir maksimums. 
 2. Rakstiet temperatūras viena vektorā, piemēram Tvertibas=\[200, 300, 400, 500, 600, 700, 800, 1000\] un lambda_max=\[l1, l2, l3,.... \]. Uzmaniet, ka abiem vektoriem ir vienāds garums. 
 3. Veidojiet grafiku ar Jūsu mērījumiem. 
 4. Veidojiet modeli, ņēmot vērā Vīna pārbīdes likumu. 
 5. Veidojiet fitu, lai atrastu modeļa parametrus. 
+Jūs varat izmantot jebkuru rīku, kas Jums liekas piemērots, bet lūdzu iesniedziet nepieciešamos datus, lai varētu izvērtēt Jūsu darbu: grafikus, kodu fragmentus, dati.
+"""
 
-#### Uzdevums 2 #### 
+# ╔═╡ 9581f784-6110-4c0d-80b2-73d4da9bd9cf
+md"""
+#### Uzdevums 3 ####
+Tagad izmantosiet mūsu aprēķina klādi vai [interaktīvu rīku PHET mājas lapā](https://phet.colorado.edu/en/simulations/blackbody-spectrum), lai izpetītu Stefāna-Bolcmaņa likumu.
 1. Pie dažādām temperatūrām, nosakiet integrālo emisiju. 
 2. Veidojiet vektorus ar $T$ vērtībām un integrālās emisijas vērtībām. 
 3. Veidojiet grafiku. 
 4. Veidojiet modeli, ņēmot vērā Stefāna-Bolcmaņa likumu. 
-5. Veidojiet fitu, lai atrastu modeļa parametrus. 
+5. Veidojiet fitu, lai atrastu modeļa parametrus.
+Jūs varat izmantot jebkuru rīku, kas Jums liekas piemērots, bet lūdzu iesniedziet nepieciešamos datus, lai varētu izvērtēt Jūsu darbu: grafikus, kodu fragmentus, dati.
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -1449,5 +1497,8 @@ version = "0.9.1+5"
 # ╟─f439534b-7730-4098-aa02-82f4cfd242e5
 # ╠═156102f5-5a08-40ce-98a3-75a506c36802
 # ╟─67f54312-4965-449c-977b-892dc3c04811
+# ╟─2927037b-5d51-4167-a11f-185404a4ab8b
+# ╟─b12508b9-083f-4347-93ff-59bfe98995e7
+# ╟─9581f784-6110-4c0d-80b2-73d4da9bd9cf
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
