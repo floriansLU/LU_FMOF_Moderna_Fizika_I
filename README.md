@@ -6,6 +6,9 @@ Ar "Jupyter" failiem var strādāt izmantojot "Jupyter Notebook", ko var atrast,
 
 Lai strādātu ar Pluto klādi, ir jābūt instalētai uz datora "Julia", bet par paketēm nav jārūpējās. Vienīgi, ir jāinstalē pati "Pluto.jl" pakete. Instrukcija var atrast šeit: https://www.juliapackages.com/p/pluto. Hīpersaite uz "FAQ" ir ļoti noderīgi, piemēram sadaļa par Pluto.jl izmantošanas pamatiem: https://github.com/fonsp/Pluto.jl/wiki/%F0%9F%94%8E-Basic-Commands-in-Pluto  .  
 
+Te ir labs video, kas apraksta kā instalēt "Julia" un "Pluto.jl" un kā ar viņiem sākt darboties:
+<iframe width="560" height="315" src="https://www.youtube.com/embed/OOjKEgbt8AI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## "Julia" Instalēšana un palaišana
 1. Lejupladēsim "Current stable release" no https://julialang.org/downloads/ attiecīgajai sistēmai. Izmantosim "Installer", ja mums ir tiesības installēt programmatūra datorā, palaidām "Installer" un sekosim instrukcijas. Ja nav tādas tiesības, varam lejupielādēt "portable" versiju. To liksim kādā mapē, klikšķinām ar labo peles pogu un izvelēsim "Extract all". 
 2. Ejam uz julia-x.x.x/bin mapi un spiedīsim "julia" aplikāciju. Atvērsies teksta logs un mēs varam strādāt tiklīdz paradīsies "julia >". Tas izskatās šādi:
