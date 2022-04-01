@@ -14,8 +14,8 @@ Lai strādātu ar Pluto klādi, ir jābūt instalētai uz datora "Julia", bet pa
 
 ## Pluto.jl Instalēšana un palaišana
 1. Startēsim "Julia" programmu.
-2. Rakstīsim "]". Uzreiz būsim pakešu menedžerā. To varam zināt, jo "Julia>" pārveidosies "Pkg>"
-3. Rakstīsim "add Pluto" un spiedīsim <ENTER>:
+3. Rakstīsim "]". Uzreiz būsim pakešu menedžerā. To varam zināt, jo "Julia>" pārveidosies "Pkg>"
+4. Rakstīsim "add Pluto" un spiedīsim <ENTER>:
   
 ![add_Pluto](/assets/images/add_Pluto.PNG)
   
@@ -28,10 +28,15 @@ Lai strādātu ar Pluto klādi, ir jābūt instalētai uz datora "Julia", bet pa
 
 Pēc īsa laika Pluto.jl atvērs logu mūsu interneta pārlukā.
 2. "Iesim uz Pluto.jl logu mūsu interneta pārlukā.
+  
 3. Dialoga kastītē zem "Open from file" liksim hīpersaiti uz vēlamo Pluto klādi (fails, kas beidzās ar .jl) no šīs Github vietnes. Alternatīvi, var lejupladēt šo failu uz savu datoru un atvērt no datora. 
+  
 4. Jāgaida nedaudz kamēr tiek instalētas nepieciešamas paketes. (Kamēr tas notiek, var iepazīties ar mācību mērķiem un saturu.)
+  
 5. Pēc tam, zem katras šūnas ir "Play" pogs. Spiežot šo pogu, palaidām paveles, kas atrodas tajā šūnā. Rezultāts tiks radīts virs šūnas. 
+  
 6. Mēs varam arī mainīt kodu katrā šūna un skatīties, kas tur notiek.
+  
 7. Neaizmirsim saglabāt klādi savā datorā, it īpaši, ja esam veikuši kādas izmaiņas. To var darīt lapas augšējā daļā. Pa vidu ir Dialoga kastīte "Save notebook". Tur rakstam faila nosaukumu ar "path" (piemēram C:\User\vārds\Documents\Pluto\manaKlade.jl, ja būsim izveidojuši iepriekš mapi C:\User\vārds\Documents\Pluto). Varam atjaunot saglabāšanu spiežot <Ctrl-S>. Vēl var lapas augšējā pusē pa labi spiest uz "Export" (trīsstūris un aplis) un eksportēt mūsu klādē 3 formātos: .jl, .html vai .pdf. 
   
 ## Dažas piezīmes
