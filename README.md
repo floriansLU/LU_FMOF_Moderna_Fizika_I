@@ -37,7 +37,13 @@ Pēc īsa laika Pluto.jl atvērs logu mūsu interneta pārlukā.
   
 6. Mēs varam arī mainīt kodu katrā šūna un skatīties, kas tur notiek.
   
-7. Neaizmirsim saglabāt klādi savā datorā, it īpaši, ja esam veikuši kādas izmaiņas. To var darīt lapas augšējā daļā. Pa vidu ir Dialoga kastīte "Save notebook". Tur rakstam faila nosaukumu ar "path" (piemēram C:\User\vārds\Documents\Pluto\manaKlade.jl, ja būsim izveidojuši iepriekš mapi C:\User\vārds\Documents\Pluto). Varam atjaunot saglabāšanu spiežot <Ctrl-S>. Vēl var lapas augšējā pusē pa labi spiest uz "Export" (trīsstūris un aplis) un eksportēt mūsu klādē 3 formātos: .jl, .html vai .pdf. 
+7. Neaizmirsim saglabāt klādi savā datorā, it īpaši, ja esam veikuši kādas izmaiņas. To var darīt lapas augšējā daļā. Pa vidu ir Dialoga kastīte "Save notebook". 
+   
+  ![file_dialog](/assets/images/Open_from_file.PNG)
+   
+  Tur rakstam faila nosaukumu ar "path" (piemēram C:\User\vārds\Documents\Pluto\manaKlade.jl, ja būsim izveidojuši iepriekš mapi C:\User\vārds\Documents\Pluto). Varam atjaunot saglabāšanu spiežot <Ctrl-S>. Vēl var lapas augšējā pusē pa labi spiest uz "Export" (trīsstūris un aplis) ![export](/assets/images/export.PNG) un eksportēt mūsu klādē 3 formātos: .jl, .html vai .pdf. 
+  
+## Pluto.jl aiveršāna
   
 ## Dažas piezīmes
 1. Viena liela atšķirība starp "Pluto" klādēm un "Jupyter" klādēm ir tas, ka "Pluto" stingri kontrolē, ka mainīgie netiek nejauši pārdefinēti. Tas nozīmē, ka drīkst kādu mainīgu definēt tikai vienreiz klādē. Jāizmanto cits mainīgā nosaukums, ja vēlāmies vairākās definīcijas. Labums ir tas, ka atšķirībā no "Jupyter", nevar notikt, ka mainīgā vērtība ir atkarīga no secības ar kuru šūnas tiek palaistas. 
