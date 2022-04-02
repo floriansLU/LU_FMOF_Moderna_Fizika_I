@@ -1,6 +1,6 @@
 # LU_FMOF_Moderna_Fizika_I
 
-Šajā vietnē var atrast failus, kurus izmantosim Latvijas Universitātes Fizikas, matemātikas un optometrijas fakultātes (LU FMOF) bakalaura programmas kursa "Moderna Fizika I" praktisko darbu ietvaros. Tiek izmantota Julia valoda (https://www.julialang.org). Faili ir Jupyter (.ipynb) vai Pluto (.jl) klādes. 
+Šajā vietnē var atrast failus, kurus izmantosim Latvijas Universitātes Fizikas, matemātikas un optometrijas fakultātes (LU FMOF) bakalaura programmas kursa "Moderna Fizika I" praktisko darbu ietvaros. Tiek izmantota "Julia" valoda (https://www.julialang.org). Faili ir Jupyter (.ipynb) vai Pluto (.jl) klādes. 
 
 Ar "Jupyter" failiem var strādāt izmantojot "Jupyter Notebook", ko var atrast, piemērram, Anaconda (https://www.anaconda.com). Ir jābūt instalēta uz datora "Julia" valoda (https://julialang.org/downloads/) kā arī Anaconda vai cita "Jupyter Notebook" istenošana.  Turklāt, visas nepieciešamas paketes ir jāinstalē "Julia" vidē ar pakešu menedžeri Pkg.jl. Pastav arī vairākas iespējas palaist Jupyter klādes mākonī.  
 
@@ -16,23 +16,23 @@ Te ir labs [video](https://www.youtube.com/embed/OOjKEgbt8AI), kas apraksta kā 
 ![This is an image](/assets/images/Julia-startup.PNG)
 
 ## Pluto.jl Instalēšana un palaišana
-1. Startēsim "Julia" programmu.
-3. Rakstīsim "]". Uzreiz būsim pakešu menedžerā. To varam zināt, jo "Julia>" pārveidosies "Pkg>"
-4. Rakstīsim "add Pluto" un spiedīsim <ENTER>:
+1. Palaižam "Julia" programmu.
+3. Nospiežam `]`. Uzreiz būsim pakešu menedžerā. To varam zināt, jo `Julia>` pārveidosies `Pkg>`
+4. Rakstām `add Pluto` un spiedīsim <ENTER>:
   
 ![add_Pluto](/assets/images/add_Pluto.PNG)
   
-4. Spiedīsim <BACKSPACE>, lai aizietu no pakešu menedžera un atgrieztos Julia. 
+4. Nospiežam `BACKSPACE`, lai aizietu no pakešu menedžera un atgrieztos Julia. 
   
 ## Pluto klādes palaišana
-1. No "Julia>", rakstīsim "Pluto.run() un spiedīsim <ENTER>:
+1. No `Julia`", rakstam `Pluto.run()` un nospiežam `ENTER`:
   
 ![Pluto_run](/assets/images/Pluto_run.PNG)
 
 Pēc īsa laika Pluto.jl atvērs logu mūsu interneta pārlukā.
-2. "Iesim uz Pluto.jl logu mūsu interneta pārlukā.
+2. Ejam uz Pluto.jl logu mūsu interneta pārlukā.
   
-3. Dialoga kastītē zem "Open from file" liksim hīpersaiti uz vēlamo Pluto klādi (fails, kas beidzās ar .jl) no šīs Github vietnes. Alternatīvi, var lejupladēt šo failu uz savu datoru un atvērt no datora. 
+3. Dialoga kastītē zem "Open from file" liekam hīpersaiti uz vēlamo Pluto klādi (fails, kas beidzās ar .jl) no šīs Github vietnes. Alternatīvi, var lejupladēt šo failu uz savu datoru un atvērt no datora. 
   
 4. Jāgaida nedaudz kamēr tiek instalētas nepieciešamas paketes. (Kamēr tas notiek, var iepazīties ar mācību mērķiem un saturu.)
   
@@ -42,7 +42,7 @@ Pēc īsa laika Pluto.jl atvērs logu mūsu interneta pārlukā.
   
 7. Ja negribam redzēt kodu, to varam slept vai atslēpt 👁️ pogu. 
   
-7. Neaizmirsim saglabāt klādi savā datorā, it īpaši, ja esam veikuši kādas izmaiņas. To var darīt lapas augšējā daļā. Pa vidu ir dialoga kastīte "Save notebook". 
+8. Neaizmirsam saglabāt klādi savā datorā, it īpaši, ja esam veikuši kādas izmaiņas. To var darīt lapas augšējā daļā. Pa vidu ir dialoga kastīte "Save notebook". 
    
   ![file_dialog](/assets/images/Open_from_file.PNG)
    
@@ -58,11 +58,11 @@ Pēc īsa laika Pluto.jl atvērs logu mūsu interneta pārlukā.
   
    ![menu](/assets/images/main_menu.PNG) 
   
-2. Aizveramm visas atvērtas klādes, kliķšinot "x" blakus atvērtām klādēm sarakstā.
+2. Aizveram visas atvērtas klādes, kliķšinot "x" blakus atvērtām klādēm sarakstā.
   
      ![exit](/assets/images/logging-out.PNG) 
   
-3. Ejām uz "Julia logu", spiežam `Ctrl`-`C`. 
+3. Ejam uz "Julia logu", spiežam `Ctrl`-`C`. 
 4. Aizveram visus logus. 
   
 ## Dažas piezīmes
