@@ -67,4 +67,4 @@ Pēc īsa laika Pluto.jl atvērs logu mūsu interneta pārlukā.
   
 ## Dažas piezīmes
 1. Viena liela atšķirība starp "Pluto" klādēm un "Jupyter" klādēm ir tas, ka "Pluto" stingri kontrolē, ka mainīgie netiek nejauši pārdefinēti. Tas nozīmē, ka drīkst kādu mainīgu definēt tikai vienreiz klādē. Jāizmanto cits mainīgā nosaukums, ja vēlāmies vairākās definīcijas. Labums ir tas, ka atšķirībā no "Jupyter", nevar notikt, ka mainīgā vērtība ir atkarīga no secības ar kuru šūnas tiek palaistas. 
-2. Vēl "Pluto.jl" klāde vēlas veicināt īsas šūnas. Tas nozīmē, ka paveļu bloki, kas sastav no vairākām rindām, ir jāliek starp "begin" un "end" pavēlēm.  
+2. Vēl "Pluto.jl" klāde vēlas veicināt īsas šūnas. Tas nozīmē, ka paveļu bloki, kas sastav no vairākām rindām, ir jāliek starp `begin` un `end` pavēlēm.  
