@@ -58,7 +58,7 @@ Pēc īsa laika Pluto.jl atvērs logu mūsu interneta pārlukā.
   
 2. Aizveramm visas atvērtas klādes, kliķšinot "x" blakus atvērtām klādēm sarakstā.
   
-     ![exit](/assets/images/logging_out.PNG) 
+     ![exit](/assets/images/logging-out.PNG) 
   
 3. Ejām uz "Julia logu", spiežam <Ctrl>-<C>. 
 4. Aizveram visus logus. 
