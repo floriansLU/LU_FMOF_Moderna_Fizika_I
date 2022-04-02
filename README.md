@@ -40,11 +40,13 @@ Pēc īsa laika Pluto.jl atvērs logu mūsu interneta pārlukā.
   
 6. Mēs varam arī mainīt kodu katrā šūna un skatīties, kas tur notiek.
   
+7. Ja negribam redzēt kodu, to varam slept vai atslēpt 👁️ pogu. 
+  
 7. Neaizmirsim saglabāt klādi savā datorā, it īpaši, ja esam veikuši kādas izmaiņas. To var darīt lapas augšējā daļā. Pa vidu ir dialoga kastīte "Save notebook". 
    
   ![file_dialog](/assets/images/Open_from_file.PNG)
    
-  Tur rakstam faila nosaukumu ar "path" (piemēram C:\User\vārds\Documents\Pluto\manaKlade.jl, ja būsim izveidojuši iepriekš mapi C:\User\vārds\Documents\Pluto). Varam atjaunot saglabāšanu spiežot <Ctrl-S>. Vēl var lapas augšējā pusē pa labi spiest uz "Export" (trīsstūris un aplis) 
+  Tur rakstam faila nosaukumu ar "path" (piemēram C:\User\vārds\Documents\Pluto\manaKlade.jl, ja būsim izveidojuši iepriekš mapi C:\User\vārds\Documents\Pluto). Varam atjaunot saglabāšanu spiežot `Ctrl`-`S`. Vēl var lapas augšējā pusē pa labi spiest uz "Export" (trīsstūris un aplis) 
   
   ![export](/assets/images/export.PNG) 
   
@@ -60,7 +62,7 @@ Pēc īsa laika Pluto.jl atvērs logu mūsu interneta pārlukā.
   
      ![exit](/assets/images/logging-out.PNG) 
   
-3. Ejām uz "Julia logu", spiežam <Ctrl>-<C>. 
+3. Ejām uz "Julia logu", spiežam `Ctrl`-`C`. 
 4. Aizveram visus logus. 
   
 ## Dažas piezīmes
