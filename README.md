@@ -50,7 +50,18 @@ Pēc īsa laika Pluto.jl atvērs logu mūsu interneta pārlukā.
   
   un eksportēt mūsu klādē 3 formātos: .jl, .html vai .pdf. 
   
-## Pluto.jl aiveršāna
+## Pluto.jl aizveršāna
+
+1. Klikšķinām uz "Pluto" logo lapas augšējā daļā pa kreisi.
+  
+   ![menu](/assets/images/main_menu.PNG) 
+  
+2. Aizveramm visas atvērtas klādes, kliķšinot "x" blakus atvērtām klādēm sarakstā.
+  
+     ![exit](/assets/images/logging-out.PNG) 
+  
+3. Ejām uz "Julia logu", spiežam <Ctrl>-<C>. 
+4. Aizveram visus logus. 
   
 ## Dažas piezīmes
 1. Viena liela atšķirība starp "Pluto" klādēm un "Jupyter" klādēm ir tas, ka "Pluto" stingri kontrolē, ka mainīgie netiek nejauši pārdefinēti. Tas nozīmē, ka drīkst kādu mainīgu definēt tikai vienreiz klādē. Jāizmanto cits mainīgā nosaukums, ja vēlāmies vairākās definīcijas. Labums ir tas, ka atšķirībā no "Jupyter", nevar notikt, ka mainīgā vērtība ir atkarīga no secības ar kuru šūnas tiek palaistas. 
