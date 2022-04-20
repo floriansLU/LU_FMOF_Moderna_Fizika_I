@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.17.5
+# v0.18.4
 
 using Markdown
 using InteractiveUtils
@@ -158,7 +158,12 @@ c) Līdzīgi iepriekšējam uzdevumam, veidojiet un pārbaudiet modeli, kas apra
 md"""
 ### Uzdevums 5. 
 #### Radiācijas ekranēšana.
-Kāpēc svīns tiek izmantots, lai ekranētu rentgena starus?
+a) Kāpēc svīns tiek izmantots, lai ekranētu rentgena starus?
+"""
+
+# ╔═╡ 3ab2cf7b-f2d1-41c2-8530-3e419980a5dd
+md"""
+b) Pēc kuras funkcijas samazināsies fotonu plūsma, kas šķērso vielas slāni, atkarībā no slāņa biezumu. Pamatojiet Jūsu atbildi ar teorētiskiem vai skaitliskiem aprēķiniem vai argumentiem.) 
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -1224,5 +1229,6 @@ version = "0.9.1+5"
 # ╟─905896c6-aa45-4957-9ed9-e18288016b46
 # ╟─b4fe3ae0-7f91-4a49-9b39-8035200ecfdd
 # ╟─7921514e-6fde-45a9-b275-0efeb588e286
+# ╟─3ab2cf7b-f2d1-41c2-8530-3e419980a5dd
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
