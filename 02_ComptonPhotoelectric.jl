@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.18.4
+# v0.17.5
 
 using Markdown
 using InteractiveUtils
@@ -11,6 +11,7 @@ begin
 	using UnitfulRecipes
 	using Plots
 	using LsqFit
+	using PlutoUI
 	plotly()
 end
 
@@ -166,18 +167,170 @@ md"""
 b) Pēc kuras funkcijas samazināsies fotonu plūsma, kas šķērso vielas slāni, atkarībā no slāņa biezumu. Pamatojiet Jūsu atbildi ar teorētiskiem vai skaitliskiem aprēķiniem vai argumentiem.) 
 """
 
+# ╔═╡ 5ec2c1f9-983e-4236-aa8a-b7f76f059b2d
+md"""
+## Piezīmes par fitēšanu
+Fitēšanas rūtīnas ir tikai programmas. Tādēļ viņas var nonākt strupceļā, un ir vajadīga cilvēka iesaistīšanas, lai nonāktu pie risinājuma. 
+
+### Tolerance
+Piemēram, kad mums ir ļoti mazi skaitli, ļoti vienkāršs fits ir neveiksmīgs. Izskatās, ka funkcija `curve_fit` no pakates LsqFit.jl nestrādā labi ar mazām vērtībām. 
+
+"""
+
+# ╔═╡ 70a934e4-b76c-40a6-84ec-dbeb43869722
+begin
+	xdata=[1,2,3,4,5]
+	ydata=2.0e-24 .* xdata
+	@. myModel1(x,p)=p[1]+p[2]*x
+	p0=[0,3e-24]
+	fit=curve_fit(myModel1,xdata,ydata,p0)
+	println("p = ",fit.param)
+	println("stderr = ", stderror(fit))
+	plot(xdata,ydata,linestyle=:auto,linewidth=0,markershape=:circle, markercolor=:red,ylims=(0,2e-23))
+	plot!(xdata,myModel1(xdata,fit.param))
+end
+
+# ╔═╡ a4fd6ed0-87da-4e84-a9ae-4aaad315b377
+	with_terminal() do
+		println("p = ",fit.param)
+		println("stderr = ", stderror(fit))
+	end
+
+# ╔═╡ 44459c45-38f9-453c-b2a5-726ca1610330
+md"""
+Vienkāršs risinājums būtu reizināt mūsu $y$ vērtības ar $10^{24}$, un pēc tam pievienot apgriezto reizinātāju ($10^{-24}$) fita rezultātam. Tomēr šī metode nav ļoti apmierinoša. Vai tā strādās, ja mums vienkārši ir liels diapazons?
+
+Cits risinājums ir izmantot "keyword arguments" (`kwargs`) `x_tol` un `g_tol`. Funkcija `curve_fit` meklē fita parametrus iteratīvi. Šie parametri nosaka, kad funkcia `curve_fit` būs "apmierināta" ar savu rezultātu, t.i., kad būs pēdēja iterācija. Parametrs `x_tol` ir saistīts ar relatīvu parametru vērtību izmaiņu starp iterācijām. Kad relatīva parametru izmaiņa ir mazākā par `x_tol`, tad `curve_fit` beidzās. Savukārt parametrs `g_tol` ir saistīts ar relatīvā $\Xi^2$ funkcijas gradientu. Atkaļ, kad tas gradients būs mazāk par `g_tol`, iterācijas beidzās. 
+
+Parametriem `x_tol` un `g_tol` ir _default_ vērtības, bet izskatās, ka tie nav adekvāti. Varam mēģināt citus.
+
+`fit=curve_fit(myModel1,xdata,ydata,p0,x_tol=1e-24,g_tol=1e-24)`
+Precīzas vērtības ir jāmeklē. Ja izvēlēsimies parāk lielas vērtības, fits varētu būt nepareizs. Izvēlojoties pārāk mazāk vērtības, fits varētu prasīt ļoti daudz laika, vai vispār nekonverģēt. 
+"""
+
+# ╔═╡ 844b8483-bcc9-4a91-9be5-4784f3002d7a
+begin
+	fit2=curve_fit(myModel1,xdata,ydata,p0,x_tol=1e-24,g_tol=1e-24)
+	plot(xdata,ydata,linestyle=:auto,linewidth=0,markershape=:circle, markercolor=:red,ylims=(0,2e-23))
+	plot!(xdata,myModel1(xdata,fit2.param))
+end
+
+# ╔═╡ c4fd2179-f382-4d35-8799-2a3efef9f321
+	with_terminal() do
+		println("p = ",fit2.param)
+		println("stderr = ", stderror(fit2))
+	end
+
+# ╔═╡ dbbab02a-8a4f-4b44-937c-d1ef38ab966a
+md"""
+### Eksponentiālas funkcijas
+Pieņemsim, ka vēlāmies pielīdzināt modeli $y=ax^n$ kādiem datiem. Mēs zinām, ka tādu vienādojumu varam pārvērst pa lineāru vienādojumu šādi: $\log y =\log a+n \log x$.
+Mēģināsim abus variantus:
+"""
+
+# ╔═╡ aa9d574c-b58d-42ea-a861-125807674b28
+begin
+	X=[1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0]
+	Y=2.5 .* X.^(3)
+	Y=Y .+ sqrt.(Y).*randn(length(Y))
+	plot(X,Y,linestyle=:auto,linewidth=0,markershape=:circle, markercolor=:red) #,ylims=(0,2e-23)))
+	@. myExpModel1(x,p)=p[1]*x^p[2]
+	P0=[1.0,1.0]
+	fit3=curve_fit(myExpModel1,X,Y,P0)
+	plot!(X,myExpModel1(X,fit3.param))
+end
+
+# ╔═╡ 84d1d9a0-054b-4e2a-a90a-d27380276521
+with_terminal() do
+	println("p = ",fit3.param)
+	println("stderr = ", stderror(fit3))
+end
+
+
+# ╔═╡ 4565a5f8-7bb9-47ec-a656-1e73edd391e1
+begin
+	lX=log.(X)
+	lY=log.(Y)
+	plot(lX,lY,linestyle=:auto,linewidth=0,markershape=:circle, markercolor=:red)
+	@. myLogModel1(x,p)=p[1]+p[2]*x
+	Pl0=[1.0,1.0]
+	fit4=curve_fit(myLogModel1,lX,lY,Pl0)
+	plot!(lX,myLogModel1(lX,fit4.param))
+end
+
+
+# ╔═╡ b8d74e23-653d-4d37-9707-854d64cbc3c1
+with_terminal() do
+	println("p = ",fit4.param)
+	println("stderr = ", stderror(fit4))
+end
+
+# ╔═╡ 51dec9ac-ab2d-430c-b277-38bcfaed52f3
+md"""
+Izskatās, ka pirmas fits ($y=ax^n$) atbilst kļūdu robežas. Otrais fits ($\log y = \log a + n\log x$) ir nedaudz sliktāks. 
+Kāpēc? Lai pielīdzinātu parametrus, tiek minimizēti attiecīgi lielumi $\sqrt ( \sum_i (f(x,p)-y_i)^2 )$ vai $\sqrt ( \sum_i (\log (f(x,p)) - \log y_i)^2 )$, kur f(x,p) ir modelis un $y_i=y_i^0+y_i^{err}$, bet kļūdas to ietekmē savādāk zem logaritma funkcijas. 
+Varam mēģināt uzlabot izmantojot svarus (_weights_): 
+```
+weights=Y
+fit5=curve_fit(myExpModel1,X,Y,weights,PP0)
+```
+Tāds svara faktors ņēm vērā, ka kļūdas tika definētas, ka $\propto \sqrt(y)$, līdz ar to, relatīva kļūda samazinās, jo lielāka $y$ vērtība. Tāpēc, vēlāmies, lai lielākas $y$ vērtības ietekmē vairāk.  
+Skatīsimies, kas notiek:
+"""
+
+# ╔═╡ 94c7c9b7-2de8-4a93-8b42-56127012fedb
+begin
+	weights=Y
+	plot(X,Y,linestyle=:auto,linewidth=0,markershape=:circle, markercolor=:red) #,ylims=(0,2e-23)))
+	PP0=[1.0,1.0]
+	fit5=curve_fit(myExpModel1,X,Y,weights,PP0)
+	plot!(X,myExpModel1(X,fit5.param))
+end
+
+# ╔═╡ d04bbf04-ab8b-4905-b14c-05578426ed55
+with_terminal() do
+	println("p = ",fit5.param)
+	println("stderr = ", stderror(fit5))
+end
+
+# ╔═╡ f48e07bf-0d5e-462e-9013-15a07100d5f3
+md"""
+Kā var redzēt, fits funkcijai $y=ax^n$ ir ļoti tuvu patiesībai un novērtēta kļūda ir maza.
+"""
+
+# ╔═╡ 456093b4-f9ef-412d-8950-34ec661f02fd
+begin
+	plot(lX,lY,linestyle=:auto,linewidth=0,markershape=:circle, markercolor=:red)
+	PPl0=[1.0,1.0]
+	fit6=curve_fit(myLogModel1,lX,lY,weights,PPl0)
+	plot!(lX,myLogModel1(lX,fit6.param))
+end
+
+# ╔═╡ 492fddf6-d464-47bc-bc9b-0d41be2564b5
+with_terminal() do
+	println("p = ",fit6.param)
+	println("stderr = ", stderror(fit6))
+end
+
+# ╔═╡ e013b711-339b-44ef-87df-d476b2e231d1
+md"""
+Fits funkcijai $\log y = \log a + n\log x$ arī uzlabojās, bet tomēr nav tik labs. 
+"""
+
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 LsqFit = "2fda8390-95c7-5789-9bda-21331edee243"
 Markdown = "d6f4376e-aef5-505a-96c1-9c027394607a"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
+PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 Unitful = "1986cc42-f94f-5a68-af5c-568840ba703d"
 UnitfulRecipes = "42071c24-d89e-48dd-8a24-8a12d9b8861f"
 
 [compat]
 LsqFit = "~0.12.1"
 Plots = "~1.27.5"
+PlutoUI = "~0.7.38"
 Unitful = "~1.11.0"
 UnitfulRecipes = "~1.5.3"
 """
@@ -188,6 +341,12 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.7.2"
 manifest_format = "2.0"
+
+[[deps.AbstractPlutoDingetjes]]
+deps = ["Pkg"]
+git-tree-sha1 = "8eaf9f1b4921132a4cff3f36a1d9ba923b14a481"
+uuid = "6e696c72-6542-2067-7265-42206c756150"
+version = "1.1.4"
 
 [[deps.Adapt]]
 deps = ["LinearAlgebra"]
@@ -472,6 +631,23 @@ deps = ["Artifacts", "Cairo_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll",
 git-tree-sha1 = "129acf094d168394e80ee1dc4bc06ec835e510a3"
 uuid = "2e76f6c2-a576-52d4-95c1-20adfe4de566"
 version = "2.8.1+1"
+
+[[deps.Hyperscript]]
+deps = ["Test"]
+git-tree-sha1 = "8d511d5b81240fc8e6802386302675bdf47737b9"
+uuid = "47d2ed2b-36de-50cf-bf87-49c2cf4b8b91"
+version = "0.0.4"
+
+[[deps.HypertextLiteral]]
+git-tree-sha1 = "2b078b5a615c6c0396c77810d92ee8c6f470d238"
+uuid = "ac1192a8-f4b3-4bfe-ba22-af5b92cd3ab2"
+version = "0.9.3"
+
+[[deps.IOCapture]]
+deps = ["Logging", "Random"]
+git-tree-sha1 = "f7be53659ab06ddc986428d3a9dcc95f6fa6705a"
+uuid = "b5f81e59-6552-4d32-b1f0-c071b021bf89"
+version = "0.2.2"
 
 [[deps.IfElse]]
 git-tree-sha1 = "debdd00ffef04665ccbb3e150747a77560e8fad1"
@@ -781,6 +957,12 @@ git-tree-sha1 = "88ee01b02fba3c771ac4dce0dfc4ecf0cb6fb772"
 uuid = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 version = "1.27.5"
 
+[[deps.PlutoUI]]
+deps = ["AbstractPlutoDingetjes", "Base64", "ColorTypes", "Dates", "Hyperscript", "HypertextLiteral", "IOCapture", "InteractiveUtils", "JSON", "Logging", "Markdown", "Random", "Reexport", "UUIDs"]
+git-tree-sha1 = "670e559e5c8e191ded66fa9ea89c97f10376bb4c"
+uuid = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
+version = "0.7.38"
+
 [[deps.Preferences]]
 deps = ["TOML"]
 git-tree-sha1 = "d3538e7f8a790dc8903519090857ef8e1283eecd"
@@ -793,9 +975,9 @@ uuid = "de0858da-6303-5e67-8744-51eddeeeb8d7"
 
 [[deps.Qt5Base_jll]]
 deps = ["Artifacts", "CompilerSupportLibraries_jll", "Fontconfig_jll", "Glib_jll", "JLLWrappers", "Libdl", "Libglvnd_jll", "OpenSSL_jll", "Pkg", "Xorg_libXext_jll", "Xorg_libxcb_jll", "Xorg_xcb_util_image_jll", "Xorg_xcb_util_keysyms_jll", "Xorg_xcb_util_renderutil_jll", "Xorg_xcb_util_wm_jll", "Zlib_jll", "xkbcommon_jll"]
-git-tree-sha1 = "ad368663a5e20dbb8d6dc2fddeefe4dae0781ae8"
+git-tree-sha1 = "c6c0f690d0cc7caddb74cef7aa847b824a16b256"
 uuid = "ea2cea3b-5b76-57ae-a6ef-0a8af62496e1"
-version = "5.15.3+0"
+version = "5.15.3+1"
 
 [[deps.QuadGK]]
 deps = ["DataStructures", "LinearAlgebra"]
@@ -1230,5 +1412,23 @@ version = "0.9.1+5"
 # ╟─b4fe3ae0-7f91-4a49-9b39-8035200ecfdd
 # ╟─7921514e-6fde-45a9-b275-0efeb588e286
 # ╟─3ab2cf7b-f2d1-41c2-8530-3e419980a5dd
+# ╠═5ec2c1f9-983e-4236-aa8a-b7f76f059b2d
+# ╠═70a934e4-b76c-40a6-84ec-dbeb43869722
+# ╠═a4fd6ed0-87da-4e84-a9ae-4aaad315b377
+# ╟─44459c45-38f9-453c-b2a5-726ca1610330
+# ╠═844b8483-bcc9-4a91-9be5-4784f3002d7a
+# ╠═c4fd2179-f382-4d35-8799-2a3efef9f321
+# ╟─dbbab02a-8a4f-4b44-937c-d1ef38ab966a
+# ╠═aa9d574c-b58d-42ea-a861-125807674b28
+# ╟─84d1d9a0-054b-4e2a-a90a-d27380276521
+# ╠═4565a5f8-7bb9-47ec-a656-1e73edd391e1
+# ╠═b8d74e23-653d-4d37-9707-854d64cbc3c1
+# ╟─51dec9ac-ab2d-430c-b277-38bcfaed52f3
+# ╠═94c7c9b7-2de8-4a93-8b42-56127012fedb
+# ╠═d04bbf04-ab8b-4905-b14c-05578426ed55
+# ╟─f48e07bf-0d5e-462e-9013-15a07100d5f3
+# ╠═456093b4-f9ef-412d-8950-34ec661f02fd
+# ╠═492fddf6-d464-47bc-bc9b-0d41be2564b5
+# ╟─e013b711-339b-44ef-87df-d476b2e231d1
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
