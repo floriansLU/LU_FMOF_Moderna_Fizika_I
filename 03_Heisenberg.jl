@@ -137,9 +137,17 @@ end
 # ╔═╡ c42d5a5d-500c-4011-a08d-9f2c3bad1ff5
 md"""
 ### Uzdevums 1. Fāzes ātrums un grūpas ātrums
-a. Cik ātri izplatās viļņu funkcija  ``\Psi(x,t)=e^{i(kx-\omega t)}``? Tas ir fāzes ātrums. Rakstiet fāzes ātruma izteiksmi un pārbaudiet animācijā. 
+a. Cik ātri izplatās viļņu funkcija  ``\Psi(x,t)=e^{i(kx-\omega t)}``? Tas ir fāzes ātrums. 
 
-b. Kāds ir kustības daudzums daļiņai, kura kustību apraksta viļņu funkcija ``\Psi(x,t)=e^{i(kx-\omega t)}``?. Kādam ātrumam atbilst šis kustības daudzums? Šis ir grupas ātrums. Vai atšķiras no fāzes ātruma.    
+b. Rakstiet fāzes ātruma izteiksmi un pārbaudiet animācijā.  
+
+c. Kāpēc saucās "fāzes ātrums"?
+
+d. Kāds ir kustības daudzums ``p`` daļiņai, kura kustību apraksta viļņu funkcija ``\Psi(x,t)=e^{i(kx-\omega t)}``? 
+
+e. Kādam ātrumam atbilst šis kustības daudzums? Šis ir grupas ātrums. Vai atšķiras no fāzes ātruma?
+
+f. Kā frekvence ``\omega``, fāzes ātrums ``v_g``, kustības daudzums ``p`` un enerģija ``E`` ir saistītas savā starpā?
 """
 
 # ╔═╡ 7156f3fe-3de5-43e6-9992-c99096336b7d
@@ -237,22 +245,6 @@ Mēs redzam ``\delta``-funkcijas pie ``k=+1``, kas atbilst viļņu funkcijai ``\
 
 """
 
-# ╔═╡ b761cae9-7761-4fa9-a67d-9bc31a223018
-md"""
-### Uzdevums 1. Fāzes ātrums un grūpas ātrums
-a. Cik ātri izplatās viļņu funkcija  ``\Psi(x,t)=e^{i(kx-\omega t)}``? Tas ir fāzes ātrums. 
-
-b. Rakstiet fāzes ātruma izteiksmi un pārbaudiet animācijā. 
-
-c. Kāpēc saucās "fāzes ātrums"?
-
-d. Kāds ir kustības daudzums ``p`` daļiņai, kura kustību apraksta viļņu funkcija ``\Psi(x,t)=e^{i(kx-\omega t)}``? 
-
-e. Kādam ātrumam atbilst šis kustības daudzums? Šis ir grupas ātrums. Vai atšķiras no fāzes ātruma?
-
-f. Kā frekvence ``\omega``, fāzes ātrums ``v_g``, kustības daudzums ``p`` un enerģija ``E`` ir saistītas savā starpā?
-"""
-
 # ╔═╡ 3a8d16de-d777-44ca-9503-7628fb3f9a63
 md"""
 #### Viļņu funkcija ar divām kustības daudzuma komponentēm
@@ -298,10 +290,11 @@ c. Ar kādu trigonometrisko identitāti tas ir saistīts?
 
 # ╔═╡ 9919160a-3bde-458d-a82a-c4e9e8f12a44
 md"""
+### Viļņu paketes
 Tagad apskatīsim viļņu paketes. 
 Pieņemsim funkciju
 
-``psi_x(x)=\frac{1}{\sqrt{2\pi}*σ}*e^(-(x- x0)^2 /(2*σ^2))``.
+``\psi_x(x)=\frac{1}{\sqrt{2\pi}*σ}*e^{-(x- x0)^2 /(2*σ^2)}``.
 
 Mēs varam runāt par lokalizēto funkciju un raksturot iespējamību atrast daļiņu ar parametru ``\Delta x``, kur
 
@@ -2049,7 +2042,6 @@ version = "0.9.1+5"
 # ╟─0ce471fc-e45d-46c0-a58f-ec432ab54df5
 # ╠═cfa6936c-22fd-4063-b585-c547ea02c711
 # ╟─ca9762ae-ed4a-4b13-9a60-2789e96bb452
-# ╟─b761cae9-7761-4fa9-a67d-9bc31a223018
 # ╟─3a8d16de-d777-44ca-9503-7628fb3f9a63
 # ╠═a5e783cb-4a1b-454b-9601-e77c3255bb7b
 # ╟─4b46bdd1-ecaa-4b7f-9bb6-ba951050b5df
