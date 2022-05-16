@@ -296,7 +296,7 @@ Pieņemsim funkciju
 
 ``\psi_x(x)=\frac{1}{\sqrt{\sqrt{2\pi}*σ}}*e^{-(x- x0)^2 /(4*σ^2)}``.
 
-Tā mums dos varbūtības sadalījuma funkciju \frac{1}{\sqrt{2\pi}*σ}*e^{-(x- x0)^2 /(2*σ^2)}
+Tā mums dos varbūtības sadalījuma funkciju 
 
 ``P(x)=\psi^{\star}(x)\psi(x)=\frac{1}{\sqrt{2\pi}*σ}*e^{-(x- x0)^2 /(2*σ^2)}``.
 
@@ -331,9 +331,9 @@ begin
 	σ=5.0
 	x0=0
 	Y2=(1/sqrt((sqrt(2*pi)*σ)))*exp.(-(X .- x0).^2 ./(4*σ^2))  # viļņu funkcija
-	p2a=plot(X,Y2)
+	p2a=plot(X,Y2,label="ψ(x)", xlabel="Position x", ylabel="ψ(x)")
 	P2=(fftshift(fft(Y2)))/Npts
-	p2b=plot(K,abs.(P2))
+	p2b=plot(K,abs.(P2), label="A(k)", xlabel="Wavenumber k", ylabel="A(k)")
 	plot(p2a,p2b,layout=(2,1))
 end
 
