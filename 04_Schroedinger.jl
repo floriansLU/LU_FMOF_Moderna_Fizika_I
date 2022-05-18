@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.17.5
+# v0.19.4
 
 using Markdown
 using InteractiveUtils
@@ -63,7 +63,7 @@ begin
 	p = momentum(basis)   # kustības daudzuma operators
 	
 	V0 = 20. # Bedres dziļums
-	d = 2    # Bedres platums
+	d = 2.0    # Bedres platums
 
 	# Tagad rakstam funkiju, kas definē poteniālu
 	function V_box(x)
@@ -82,6 +82,9 @@ begin
 	# Ar vienu rindu risinām Šrēdingera vienāojumu:
 	energies, states = eigenstates((H+dagger(H))/2, Nsols)    
 end
+
+# ╔═╡ 9a8b8479-f5a2-46a5-94b7-e66d2d2a3a02
+typeof(p)
 
 # ╔═╡ a64c019b-4c80-4f48-8cfa-4646c26c27e6
 md"""
@@ -168,12 +171,12 @@ Tagad varam skatīties, kā viļņu funkcija attīstās laikā.
 # ╔═╡ 775f9389-8040-42c4-9b3f-cd55cd7ba013
 begin
 	gr()
-	#x0box = 0
-	#p0box = 1.5
-	#sigma0box = 0.25
-	#Ψ0box = gaussianstate(basis, x0box, p0box, sigma0box);
+	x0box = 0
+	p0box = 1.5
+	sigma0box = 0.25
+	Ψ0box = gaussianstate(basis, x0box, p0box, sigma0box);
 	boxAnimation=Animation()
-	Ψ0box=states[1]+states[3] # Sāksim ar stāvokli, kuru veido divi no īpašstāvokļiem.
+	#Ψ0box=states[1]+states[2] # Sāksim ar stāvokli, kuru veido divi no īpašstāvokļiem.
 	
 	# Time evolution
 	Trange = [0:0.05:50;]     # iterators ar laika vērtībām
@@ -239,7 +242,7 @@ end
 
 # ╔═╡ 21bc8a72-5790-4e81-b420-d6d47047a24a
 md"""
-### Uzdevums 3. Harmoniskais oscilātors. 
+### Uzdevums 2. Harmoniskais oscilātors. 
 
 a. Kāda ir attiecībā starp kvantu skaitli ``n`` un mezgļu punktu skaitu?
 
@@ -327,19 +330,19 @@ end
 
 # ╔═╡ 8609b62a-66a7-4186-bd3e-0db3794fd8d5
 md"""
-#### Uzdevums 4. Elektrons bedre ar bezgalīgi augstām sieniņām
-Elektrons atrodas bezgalīgi dziļa bedrē (``0<x<L``). Aprēķiniet varbūtību, ka elektrons atrodas starp ``x=0`` un ``x=L/4``.
+#### Uzdevums 3. Elektrons bedre ar bezgalīgi augstām sieniņām
+Elektrons atrodas bezgalīgi dziļa bedrē (``0<x<L``). Pieņemiet, ka elektrons atrodas pamatstāvoklī. Aprēķiniet varbūtību, ka elektrons atrodas starp ``x=0`` un ``x=L/4``.
 """
 
 # ╔═╡ feb57b20-7c4e-4d60-9a63-35b76c341a01
 md"""
-#### Uzdevums 5. Spiediens bedrē.
+#### Uzdevums 4. Spiediens bedrē.
 Daļiņa atrodas viendimensiju potenciālā bedrē ar bezgalīgi augstām sienām. Bedres platums ``L``. Nosakiet daļiņas spiediena spēku uz bedres sieniņām, ja daļiņai ir minimālā enerģija. [Saspiežot kasti nepieciešams padarīt darbu, kas pāriet daļiņas iekšējā enerģijā.]
 """
 
 # ╔═╡ 46310bf4-b49e-42de-a18a-d2e34093c6cb
 md"""
-#### Uzdevums 6. ``\delta-``funkcijas potenciāls.
+#### Uzdevums 5. ``\delta-``funkcijas potenciāls.
 
 Izskatiet potenciālu ``V(x) = −aV_0 \delta(x)``. 
 
@@ -350,12 +353,27 @@ Izskatiet potenciālu ``V(x) = −aV_0 \delta(x)``.
 a. Pierādiet, ka potenciālam ir saistīts stāvoklis ar enerģiju ``E=ma^2 V_0^2/2\hbar^2``. 
 
 b. Atrodiet normēto viļņu funkciju.
+
+Varbūt noder atcerēties: 
+1. ``\lim_{\epsilon \rightarrow 0}[\psi'(\epsilon)-\psi'(\epsilon)] = \lim_{\epsilon \rightarrow 0} \int_{-\epsilon}^{\epsilon} \psi''(x) \mathrm{dx}``.
+
+2. ``\int_{-\infty}^{\infty} f(x)\delta(x-x_0) \mathrm{dx} = f(x_0)``.
 """
 
 # ╔═╡ d0d9ee0b-b1db-4e47-8788-37bf879167b9
 md"""
-#### Uzdevums 7. Bedre, kas pekšņi palielināsies
+#### Uzdevums 6. Bedre, kas pekšņi palielināsies
 Daļiņa atrodas bezgalīgi dziļas bedres pamatstāvoklī. Bedres platums ir ``L``.  Pēkšņi bedres platums palielinās divas reizes uz ``2L``, nemainot daļiņas viļņu funkciju. Pierādiet, ka varbūtība, ka daļiņa palīks jaunās bedres pamatstāvoklī ir ``(8/3\pi)^2``.
+
+Varbūt noder atcerēties:
+
+1. ``\psi(x)=\sum_{n=1}^{n=\infty} a_n \phi_n(x)``, 
+
+kur ``\phi_n(x)`` ir konkrētā Hamiltoniāna ``\hat{H}`` īpašfunkcijas.
+
+2. ``\int_{-\infty}^{\infty} \phi_n(x) \phi_m(x) \mathrm{dx} = \delta_{mn}``
+
+3. ``a_n = \int_{-\infty}^{\infty} \psi(x) \phi_n(x) \mathrm{dx} = \int_{-infty}^{\infty} \left(\sum_{m=1}^{m=\infty}\phi_m(x) \right)  \phi_n(x) \mathrm{dx} `` 
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -445,9 +463,9 @@ version = "1.0.8+0"
 
 [[deps.CPUSummary]]
 deps = ["CpuId", "IfElse", "Static"]
-git-tree-sha1 = "0eaf4aedad5ccc3e39481db55d72973f856dc564"
+git-tree-sha1 = "baaac45b4462b3b0be16726f38b789bf330fcb7a"
 uuid = "2a0fbf3d-bb9c-48f3-b0a9-814d99fd7ab9"
-version = "0.1.22"
+version = "0.1.21"
 
 [[deps.Cairo_jll]]
 deps = ["Artifacts", "Bzip2_jll", "Fontconfig_jll", "FreeType2_jll", "Glib_jll", "JLLWrappers", "LZO_jll", "Libdl", "Pixman_jll", "Pkg", "Xorg_libXext_jll", "Xorg_libXrender_jll", "Zlib_jll", "libpng_jll"]
@@ -487,9 +505,9 @@ version = "3.18.0"
 
 [[deps.ColorTypes]]
 deps = ["FixedPointNumbers", "Random"]
-git-tree-sha1 = "a985dc37e357a3b22b260a5def99f3530fb415d3"
+git-tree-sha1 = "63d1e802de0c4882c00aee5cb16f9dd4d6d7c59c"
 uuid = "3da002f7-5984-5a60-b8a6-cbb66c0b333f"
-version = "0.11.2"
+version = "0.11.1"
 
 [[deps.ColorVectorSpace]]
 deps = ["ColorTypes", "FixedPointNumbers", "LinearAlgebra", "SpecialFunctions", "Statistics", "TensorCore"]
@@ -597,10 +615,10 @@ uuid = "c894b116-72e5-5b58-be3c-e6d8d4ac2b12"
 version = "8.4.2"
 
 [[deps.DiffEqNoiseProcess]]
-deps = ["DiffEqBase", "Distributions", "LinearAlgebra", "Optim", "PoissonRandom", "QuadGK", "Random", "Random123", "RandomNumbers", "RecipesBase", "RecursiveArrayTools", "ResettableStacks", "SciMLBase", "StaticArrays", "Statistics"]
-git-tree-sha1 = "c3a645022cc85d8b13f0f928546a497d11699f53"
+deps = ["DiffEqBase", "Distributions", "LinearAlgebra", "Optim", "PoissonRandom", "QuadGK", "Random", "Random123", "RandomNumbers", "RecipesBase", "RecursiveArrayTools", "Requires", "ResettableStacks", "SciMLBase", "StaticArrays", "Statistics"]
+git-tree-sha1 = "d6839a44a268c69ef0ed927b22a6f43c8a4c2e73"
 uuid = "77a26b50-5914-5dd7-bc55-306e6241c503"
-version = "5.10.0"
+version = "5.9.0"
 
 [[deps.DiffResults]]
 deps = ["StaticArrays"]
@@ -731,9 +749,9 @@ version = "0.4.2"
 
 [[deps.ForwardDiff]]
 deps = ["CommonSubexpressions", "DiffResults", "DiffRules", "LinearAlgebra", "LogExpFunctions", "NaNMath", "Preferences", "Printf", "Random", "SpecialFunctions", "StaticArrays"]
-git-tree-sha1 = "89cc49bf5819f0a10a7a3c38885e7c7ee048de57"
+git-tree-sha1 = "7a380de46b0a1db85c59ebbce5788412a39e4cb7"
 uuid = "f6369f11-7733-5829-9624-2563aa707210"
-version = "0.10.29"
+version = "0.10.28"
 
 [[deps.FreeType2_jll]]
 deps = ["Artifacts", "Bzip2_jll", "JLLWrappers", "Libdl", "Pkg", "Zlib_jll"]
@@ -852,9 +870,9 @@ version = "2.7.1+0"
 
 [[deps.HypergeometricFunctions]]
 deps = ["DualNumbers", "LinearAlgebra", "SpecialFunctions", "Test"]
-git-tree-sha1 = "cb7099a0109939f16a4d3b572ba8396b1f6c7c31"
+git-tree-sha1 = "65e4589030ef3c44d3b90bdc5aac462b4bb05567"
 uuid = "34004b35-14d8-5ef3-9330-4cdb6864b03a"
-version = "0.3.10"
+version = "0.3.8"
 
 [[deps.Hyperscript]]
 deps = ["Test"]
@@ -997,9 +1015,9 @@ version = "1.3.0"
 
 [[deps.LabelledArrays]]
 deps = ["ArrayInterface", "ChainRulesCore", "LinearAlgebra", "MacroTools", "StaticArrays"]
-git-tree-sha1 = "1cccf6d366e51fbaf80303158d49bb2171acfeee"
+git-tree-sha1 = "fbd884a02f8bf98fd90c53c1c9d2b21f9f30f42a"
 uuid = "2ee39098-c373-598a-b85f-a56591580800"
-version = "1.9.0"
+version = "1.8.0"
 
 [[deps.Latexify]]
 deps = ["Formatting", "InteractiveUtils", "LaTeXStrings", "MacroTools", "Markdown", "Printf", "Requires"]
@@ -1123,9 +1141,9 @@ uuid = "56ddb016-857b-54e1-b83d-db4d58db5568"
 
 [[deps.LoopVectorization]]
 deps = ["ArrayInterface", "CPUSummary", "ChainRulesCore", "CloseOpenIntervals", "DocStringExtensions", "ForwardDiff", "HostCPUFeatures", "IfElse", "LayoutPointers", "LinearAlgebra", "OffsetArrays", "PolyesterWeave", "SIMDDualNumbers", "SLEEFPirates", "SpecialFunctions", "Static", "ThreadingUtilities", "UnPack", "VectorizationBase"]
-git-tree-sha1 = "4392c19f0203df81512b6790a0a67446650bdce0"
+git-tree-sha1 = "4acc35e95bf18de5e9562d27735bef0950f2ed74"
 uuid = "bdcacae8-1622-11e9-2a5c-532679323890"
-version = "0.12.110"
+version = "0.12.108"
 
 [[deps.MKL_jll]]
 deps = ["Artifacts", "IntelOpenMP_jll", "JLLWrappers", "LazyArtifacts", "Libdl", "Pkg"]
@@ -1269,9 +1287,9 @@ version = "8.44.0+0"
 
 [[deps.PDMats]]
 deps = ["LinearAlgebra", "SparseArrays", "SuiteSparse"]
-git-tree-sha1 = "027185efff6be268abbaf30cfd53ca9b59e3c857"
+git-tree-sha1 = "c8c62e4aa5bbd0e48bafe294d4325fc87194a5ed"
 uuid = "90014a1f-27ba-587c-ab20-58faa44d9150"
-version = "0.11.10"
+version = "0.11.9"
 
 [[deps.Parameters]]
 deps = ["OrderedCollections", "UnPack"]
@@ -1327,9 +1345,9 @@ version = "0.4.0"
 
 [[deps.Polyester]]
 deps = ["ArrayInterface", "BitTwiddlingConvenienceFunctions", "CPUSummary", "IfElse", "ManualMemory", "PolyesterWeave", "Requires", "Static", "StrideArraysCore", "ThreadingUtilities"]
-git-tree-sha1 = "0578fa5fde97f8cf19aa89f8373d92624314f547"
+git-tree-sha1 = "8d95a735921204f5d551ac300b20d802a150433a"
 uuid = "f517fe37-dbe3-4b94-8317-1923a5111588"
-version = "0.6.9"
+version = "0.6.8"
 
 [[deps.PolyesterWeave]]
 deps = ["BitTwiddlingConvenienceFunctions", "CPUSummary", "IfElse", "Static", "ThreadingUtilities"]
@@ -1426,10 +1444,10 @@ uuid = "01d81517-befc-4cb6-b9ec-a95719d0359c"
 version = "0.5.2"
 
 [[deps.RecursiveArrayTools]]
-deps = ["Adapt", "ArrayInterface", "ChainRulesCore", "DocStringExtensions", "FillArrays", "LinearAlgebra", "RecipesBase", "StaticArrays", "Statistics", "ZygoteRules"]
-git-tree-sha1 = "07d6015398c39fb5d7765079c2386dbde360db64"
+deps = ["Adapt", "ArrayInterface", "ChainRulesCore", "DocStringExtensions", "FillArrays", "LinearAlgebra", "RecipesBase", "Requires", "StaticArrays", "Statistics", "ZygoteRules"]
+git-tree-sha1 = "bfe14f127f3e7def02a6c2b1940b39d0dabaa3ef"
 uuid = "731186ca-8d62-57ce-b412-fbd966d074cd"
-version = "2.27.0"
+version = "2.26.3"
 
 [[deps.RecursiveFactorization]]
 deps = ["LinearAlgebra", "LoopVectorization", "Polyester", "StrideArraysCore", "TriangularSolve"]
@@ -1494,9 +1512,9 @@ version = "0.6.32"
 
 [[deps.SciMLBase]]
 deps = ["ArrayInterface", "CommonSolve", "ConstructionBase", "Distributed", "DocStringExtensions", "IteratorInterfaceExtensions", "LinearAlgebra", "Logging", "Markdown", "RecipesBase", "RecursiveArrayTools", "StaticArrays", "Statistics", "Tables", "TreeViews"]
-git-tree-sha1 = "8161f13168845aefff8dc193b22e3fcb4d8f91a9"
+git-tree-sha1 = "5420ffd1d5ad49e2c8309efb7338cc2443487029"
 uuid = "0bca4576-84f4-4d90-8ffe-ffa030f20462"
-version = "1.31.5"
+version = "1.31.4"
 
 [[deps.Scratch]]
 deps = ["Dates"]
@@ -1584,9 +1602,9 @@ version = "0.33.16"
 
 [[deps.StatsFuns]]
 deps = ["ChainRulesCore", "HypergeometricFunctions", "InverseFunctions", "IrrationalConstants", "LogExpFunctions", "Reexport", "Rmath", "SpecialFunctions"]
-git-tree-sha1 = "5783b877201a82fc0014cbf381e7e6eb130473a4"
+git-tree-sha1 = "ca9f8a0c9f2e41431dc5b7697058a3f8f8b89498"
 uuid = "4c63d2b9-4356-54db-8cca-17b64c39e42c"
-version = "1.0.1"
+version = "1.0.0"
 
 [[deps.StochasticDiffEq]]
 deps = ["Adapt", "ArrayInterface", "DataStructures", "DiffEqBase", "DiffEqJump", "DiffEqNoiseProcess", "DocStringExtensions", "FillArrays", "FiniteDiff", "ForwardDiff", "LevyArea", "LinearAlgebra", "Logging", "MuladdMacro", "NLsolve", "OrdinaryDiffEq", "Random", "RandomNumbers", "RecursiveArrayTools", "Reexport", "SparseArrays", "SparseDiffTools", "StaticArrays", "UnPack"]
@@ -1596,9 +1614,9 @@ version = "6.47.0"
 
 [[deps.StrideArraysCore]]
 deps = ["ArrayInterface", "CloseOpenIntervals", "IfElse", "LayoutPointers", "ManualMemory", "Requires", "SIMDTypes", "Static", "ThreadingUtilities"]
-git-tree-sha1 = "e03eacc0b8c1520e73aa84922ce44a14f024b210"
+git-tree-sha1 = "70d9007ff05440058c0301985b2275edc2b2ce25"
 uuid = "7792a7ef-975c-4747-a70f-980b88e8d1da"
-version = "0.3.6"
+version = "0.3.3"
 
 [[deps.StructArrays]]
 deps = ["Adapt", "DataAPI", "StaticArrays", "Tables"]
@@ -1939,6 +1957,7 @@ version = "0.9.1+5"
 # ╠═83d05132-b257-4c45-ad70-a24c92c8f8ee
 # ╟─be74a383-df10-463c-92a2-a093b8a2d784
 # ╠═5afc4a98-b3cb-49c0-a5a3-acbcd6509ed2
+# ╠═9a8b8479-f5a2-46a5-94b7-e66d2d2a3a02
 # ╟─a64c019b-4c80-4f48-8cfa-4646c26c27e6
 # ╠═c4b5d3df-2ea1-48c8-9598-48fc1caaba16
 # ╠═cef656c7-2cda-41f8-bca1-c17138f35e73
@@ -1959,7 +1978,7 @@ version = "0.9.1+5"
 # ╠═74bed55e-3150-4b75-a087-11ba127143fb
 # ╟─fa269ca9-01fc-4a6d-bf35-4e1ba561a7ba
 # ╠═1341e7a1-ee6e-4e60-b46b-8b392f1989b5
-# ╠═8609b62a-66a7-4186-bd3e-0db3794fd8d5
+# ╟─8609b62a-66a7-4186-bd3e-0db3794fd8d5
 # ╟─feb57b20-7c4e-4d60-9a63-35b76c341a01
 # ╟─46310bf4-b49e-42de-a18a-d2e34093c6cb
 # ╟─d0d9ee0b-b1db-4e47-8788-37bf879167b9
